@@ -9,6 +9,22 @@ export default class Bedroom extends Component {
 
   constructor (props) {
     super(props)
+    this.state = {temp: [], humid: [], sound: [], light: []}
+  }
+
+  componentDidMount () {
+    setInterval(() => {
+      let generate = []
+      for (let i = 0; i <= 100; i++) {
+        generate.push(parseInt(Math.random().toFixed(2) * 100))
+      }
+      this.setState({
+        temp: generate,
+        humid: generate,
+        sound: generate,
+        light: generate
+      })
+    }, 2000)
   }
 
   render () {
@@ -32,19 +48,19 @@ export default class Bedroom extends Component {
 
                   <div className="columns">
                     <div className="column">
-                      <Temperature/>
+                      <Temperature data={this.state.temp}/>
                     </div>
                     <div className="column">
-                      <Humidity/>
+                      <Humidity data={this.state.humid}/>
                     </div>
                   </div>
 
                   <div className="columns">
                     <div className="column">
-                      <Sound/>
+                      <Sound data={this.state.sound}/>
                     </div>
                     <div className="column">
-                      <Light/>
+                      <Light data={this.state.light}/>
                     </div>
                   </div>
 

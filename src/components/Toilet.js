@@ -6,6 +6,25 @@ import Ammonia from './toilets/Ammonia.jsx'
 
 export default class Location extends Component {
 
+  constructor (props) {
+    super(props)
+    this.state = {temp: [], humid: [], ammonia: []}
+  }
+
+  componentDidMount () {
+    setInterval(() => {
+      let generate = []
+      for (let i = 0; i <= 100; i++) {
+        generate.push(parseInt(Math.random().toFixed(2) * 100))
+      }
+      this.setState({
+        temp: generate,
+        humid: generate,
+        ammonia: generate
+      })
+    }, 2000)
+  }
+
   render () {
     return (
       <div className='container'>
@@ -26,16 +45,16 @@ export default class Location extends Component {
 
                   <div className="columns">
                     <div className="column">
-                      <Temperature/>
+                      <Temperature data={this.state.temp}/>
                     </div>
                     <div className="column">
-                      <Humidity/>
+                      <Humidity data={this.state.humid}/>
                     </div>
                   </div>
 
                   <div className="columns">
                     <div className="column">
-                      <Ammonia/>
+                      <Ammonia data={this.state.ammonia}/>
                     </div>
                   </div>
 

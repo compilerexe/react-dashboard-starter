@@ -42983,10 +42983,30 @@ var Environment = function (_Component) {
   function Environment(props) {
     _classCallCheck(this, Environment);
 
-    return _possibleConstructorReturn(this, (Environment.__proto__ || Object.getPrototypeOf(Environment)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Environment.__proto__ || Object.getPrototypeOf(Environment)).call(this, props));
+
+    _this.state = { temp: [], humid: [], sound: [] };
+    return _this;
   }
 
   _createClass(Environment, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setInterval(function () {
+        var generate = [];
+        for (var i = 0; i <= 100; i++) {
+          generate.push(parseInt(Math.random().toFixed(2) * 100));
+        }
+        _this2.setState({
+          temp: generate,
+          humid: generate,
+          sound: generate
+        });
+      }, 2000);
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -43029,12 +43049,12 @@ var Environment = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Temperature2.default, null)
+                      _react2.default.createElement(_Temperature2.default, { data: this.state.temp })
                     ),
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Humidity2.default, null)
+                      _react2.default.createElement(_Humidity2.default, { data: this.state.humid })
                     )
                   ),
                   _react2.default.createElement(
@@ -43043,7 +43063,7 @@ var Environment = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Sound2.default, null)
+                      _react2.default.createElement(_Sound2.default, { data: this.state.sound })
                     )
                   )
                 )
@@ -43708,63 +43728,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Temperature = function Temperature(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Temperature',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(87, 230, 255, 1)',
-    borderColor: 'rgba(87, 230, 255, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(75,192,192,1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'C'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Temperature',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(87, 230, 255, 1)',
+      borderColor: 'rgba(87, 230, 255, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Temperature = function Temperature() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'C'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -59762,63 +59779,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Humidity = function Humidity(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Humidity',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(255, 87, 112, 1)',
-    borderColor: 'rgba(255, 87, 112, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(255, 87, 112, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'RH'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Humidity',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(255, 87, 112, 1)',
+      borderColor: 'rgba(255, 87, 112, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(255, 87, 112, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Humidity = function Humidity() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'RH'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -59843,63 +59857,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Sound = function Sound(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Sound',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(134, 255, 87, 1)',
-    borderColor: 'rgba(134, 255, 87, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(134, 255, 87, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'DB'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Sound',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(134, 255, 87, 1)',
+      borderColor: 'rgba(134, 255, 87, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(134, 255, 87, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Sound = function Sound() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'DB'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -59956,10 +59967,31 @@ var Gas = function (_Component) {
   function Gas(props) {
     _classCallCheck(this, Gas);
 
-    return _possibleConstructorReturn(this, (Gas.__proto__ || Object.getPrototypeOf(Gas)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Gas.__proto__ || Object.getPrototypeOf(Gas)).call(this, props));
+
+    _this.state = { battery: [], co: [], co2: [], h2o: [] };
+    return _this;
   }
 
   _createClass(Gas, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setInterval(function () {
+        var generate = [];
+        for (var i = 0; i <= 100; i++) {
+          generate.push(parseInt(Math.random().toFixed(2) * 100));
+        }
+        _this2.setState({
+          battery: generate,
+          co: generate,
+          co2: generate,
+          h2o: generate
+        });
+      }, 2000);
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -60002,7 +60034,7 @@ var Gas = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Battery2.default, null)
+                      _react2.default.createElement(_Battery2.default, { data: this.state.battery })
                     )
                   ),
                   _react2.default.createElement(
@@ -60011,12 +60043,12 @@ var Gas = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Co4.default, null)
+                      _react2.default.createElement(_Co4.default, { data: this.state.co2 })
                     ),
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Co2.default, null)
+                      _react2.default.createElement(_Co2.default, { data: this.state.co })
                     )
                   ),
                   _react2.default.createElement(
@@ -60025,7 +60057,7 @@ var Gas = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_H2O2.default, null)
+                      _react2.default.createElement(_H2O2.default, { data: this.state.h2o })
                     )
                   )
                 )
@@ -60061,63 +60093,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Battery = function Battery(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Battery',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(255, 165, 87, 1)',
-    borderColor: 'rgba(255, 165, 87, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(255, 165, 87, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(255, 165, 87, 1)',
-    pointHoverBorderColor: 'rgba(255, 165, 87, 1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'C'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Battery',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(255, 165, 87, 1)',
+      borderColor: 'rgba(255, 165, 87, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(255, 165, 87, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(255, 165, 87, 1)',
+      pointHoverBorderColor: 'rgba(255, 165, 87, 1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Battery = function Battery() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'C'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60142,63 +60171,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Co = function Co(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Co',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(134, 255, 87, 1)',
-    borderColor: 'rgba(134, 255, 87, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(134, 255, 87, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: ''
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Co',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(134, 255, 87, 1)',
+      borderColor: 'rgba(134, 255, 87, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(134, 255, 87, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Co = function Co() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: ''
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60223,63 +60249,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Co2 = function Co2(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Co2',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(255, 87, 112, 1)',
-    borderColor: 'rgba(255, 87, 112, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(255, 87, 112, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: ''
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Co2',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(255, 87, 112, 1)',
+      borderColor: 'rgba(255, 87, 112, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(255, 87, 112, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Co2 = function Co2() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: ''
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60304,63 +60327,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var H2O = function H2O(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'H2O',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(87, 230, 255, 1)',
-    borderColor: 'rgba(87, 230, 255, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(75,192,192,1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: ''
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'H2O',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(87, 230, 255, 1)',
+      borderColor: 'rgba(87, 230, 255, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var H2O = function H2O() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: ''
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60410,13 +60430,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Location = function (_Component) {
   _inherits(Location, _Component);
 
-  function Location() {
+  function Location(props) {
     _classCallCheck(this, Location);
 
-    return _possibleConstructorReturn(this, (Location.__proto__ || Object.getPrototypeOf(Location)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Location.__proto__ || Object.getPrototypeOf(Location)).call(this, props));
+
+    _this.state = { temp: [], humid: [], ammonia: [] };
+    return _this;
   }
 
   _createClass(Location, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setInterval(function () {
+        var generate = [];
+        for (var i = 0; i <= 100; i++) {
+          generate.push(parseInt(Math.random().toFixed(2) * 100));
+        }
+        _this2.setState({
+          temp: generate,
+          humid: generate,
+          ammonia: generate
+        });
+      }, 2000);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -60458,12 +60498,12 @@ var Location = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Temperature2.default, null)
+                      _react2.default.createElement(_Temperature2.default, { data: this.state.temp })
                     ),
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Humidity2.default, null)
+                      _react2.default.createElement(_Humidity2.default, { data: this.state.humid })
                     )
                   ),
                   _react2.default.createElement(
@@ -60472,7 +60512,7 @@ var Location = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Ammonia2.default, null)
+                      _react2.default.createElement(_Ammonia2.default, { data: this.state.ammonia })
                     )
                   )
                 )
@@ -60508,63 +60548,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Temperature = function Temperature(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Temperature',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(87, 230, 255, 1)',
-    borderColor: 'rgba(87, 230, 255, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(75,192,192,1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'C'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Temperature',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(87, 230, 255, 1)',
+      borderColor: 'rgba(87, 230, 255, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Temperature = function Temperature() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'C'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60589,63 +60626,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Humidity = function Humidity(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Humidity',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(255, 87, 112, 1)',
-    borderColor: 'rgba(255, 87, 112, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(255, 87, 112, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'RH'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Humidity',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(255, 87, 112, 1)',
+      borderColor: 'rgba(255, 87, 112, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(255, 87, 112, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Humidity = function Humidity() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'RH'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60670,63 +60704,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Ammonia = function Ammonia(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Ammonia',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(134, 255, 87, 1)',
-    borderColor: 'rgba(134, 255, 87, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(134, 255, 87, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: ''
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Ammonia',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(134, 255, 87, 1)',
+      borderColor: 'rgba(134, 255, 87, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(134, 255, 87, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Ammonia = function Ammonia() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: ''
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -60864,10 +60895,31 @@ var Bedroom = function (_Component) {
   function Bedroom(props) {
     _classCallCheck(this, Bedroom);
 
-    return _possibleConstructorReturn(this, (Bedroom.__proto__ || Object.getPrototypeOf(Bedroom)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Bedroom.__proto__ || Object.getPrototypeOf(Bedroom)).call(this, props));
+
+    _this.state = { temp: [], humid: [], sound: [], light: [] };
+    return _this;
   }
 
   _createClass(Bedroom, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setInterval(function () {
+        var generate = [];
+        for (var i = 0; i <= 100; i++) {
+          generate.push(parseInt(Math.random().toFixed(2) * 100));
+        }
+        _this2.setState({
+          temp: generate,
+          humid: generate,
+          sound: generate,
+          light: generate
+        });
+      }, 2000);
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -60910,12 +60962,12 @@ var Bedroom = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Temperature2.default, null)
+                      _react2.default.createElement(_Temperature2.default, { data: this.state.temp })
                     ),
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Humidity2.default, null)
+                      _react2.default.createElement(_Humidity2.default, { data: this.state.humid })
                     )
                   ),
                   _react2.default.createElement(
@@ -60924,12 +60976,12 @@ var Bedroom = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Sound2.default, null)
+                      _react2.default.createElement(_Sound2.default, { data: this.state.sound })
                     ),
                     _react2.default.createElement(
                       'div',
                       { className: 'column' },
-                      _react2.default.createElement(_Light2.default, null)
+                      _react2.default.createElement(_Light2.default, { data: this.state.light })
                     )
                   )
                 )
@@ -60965,63 +61017,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Temperature = function Temperature(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Temperature',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(87, 230, 255, 1)',
-    borderColor: 'rgba(87, 230, 255, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(75,192,192,1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'C'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Temperature',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(87, 230, 255, 1)',
+      borderColor: 'rgba(87, 230, 255, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Temperature = function Temperature() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'C'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -61046,63 +61095,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Humidity = function Humidity(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Humidity',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(255, 87, 112, 1)',
-    borderColor: 'rgba(255, 87, 112, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(255, 87, 112, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'RH'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Humidity',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(255, 87, 112, 1)',
+      borderColor: 'rgba(255, 87, 112, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(255, 87, 112, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Humidity = function Humidity() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'RH'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -61127,63 +61173,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Sound = function Sound(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Sound',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(134, 255, 87, 1)',
-    borderColor: 'rgba(134, 255, 87, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(134, 255, 87, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'DB'
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Sound',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(134, 255, 87, 1)',
+      borderColor: 'rgba(134, 255, 87, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(134, 255, 87, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderColor: 'rgba(134, 255, 87, 1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Sound = function Sound() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'DB'
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 
@@ -61208,63 +61251,60 @@ var _reactChartjs = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data_mockup = [];
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-for (var i = 0; i <= 100; i++) {
-  data_mockup.push(parseInt(Math.random().toFixed(2) * 100));
-}
+var Light = function Light(props) {
 
-var line_data = {
-  labels: [''],
-  datasets: [{
-    label: 'Light',
-    fill: false,
-    lineTension: 0.5,
-    backgroundColor: 'rgba(174, 87, 255, 1)',
-    borderColor: 'rgba(174, 87, 255, 1)',
-    borderCapStyle: 'butt',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(174, 87, 255, 1)',
-    pointBackgroundColor: '#fff',
-    pointBorderWidth: 2,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(174, 87, 255, 1)',
-    pointHoverBorderColor: 'rgba(174, 87, 255, 1)',
-    pointHoverBorderWidth: 2,
-    pointRadius: 3,
-    pointHitRadius: 5,
-    data: [].concat(data_mockup)
-  }]
-};
-
-var line_options = {
-  responsive: true,
-  title: {
-    display: false,
-    text: 'Chart.js Line Chart'
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false
-  },
-  hover: {
-    mode: 'nearest',
-    intersect: true
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: ''
-      }
+  var line_data = {
+    labels: [''],
+    datasets: [{
+      label: 'Light',
+      fill: false,
+      lineTension: 0.5,
+      backgroundColor: 'rgba(174, 87, 255, 1)',
+      borderColor: 'rgba(174, 87, 255, 1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(174, 87, 255, 1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(174, 87, 255, 1)',
+      pointHoverBorderColor: 'rgba(174, 87, 255, 1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 5,
+      data: [].concat(_toConsumableArray(props.data))
     }]
-  }
-};
+  };
 
-var Light = function Light() {
+  var line_options = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: ''
+        }
+      }]
+    }
+  };
+
   return _react2.default.createElement(_reactChartjs.Line, { data: line_data, options: line_options });
 };
 

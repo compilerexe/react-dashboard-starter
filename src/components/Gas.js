@@ -9,6 +9,22 @@ export default class Gas extends Component {
 
   constructor (props) {
     super(props)
+    this.state = {battery: [], co: [], co2: [], h2o: []}
+  }
+
+  componentDidMount () {
+    setInterval(() => {
+      let generate = []
+      for (let i = 0; i <= 100; i++) {
+        generate.push(parseInt(Math.random().toFixed(2) * 100))
+      }
+      this.setState({
+        battery: generate,
+        co: generate,
+        co2: generate,
+        h2o: generate
+      })
+    }, 2000)
   }
 
   render () {
@@ -32,22 +48,22 @@ export default class Gas extends Component {
 
                   <div className="columns">
                     <div className="column">
-                      <Battery/>
+                      <Battery data={this.state.battery}/>
                     </div>
                   </div>
 
                   <div className="columns">
                     <div className="column">
-                      <Co2/>
+                      <Co2 data={this.state.co2}/>
                     </div>
                     <div className="column">
-                      <Co/>
+                      <Co data={this.state.co}/>
                     </div>
                   </div>
 
                   <div className="columns">
                     <div className="column">
-                      <H2O/>
+                      <H2O data={this.state.h2o}/>
                     </div>
                   </div>
 
