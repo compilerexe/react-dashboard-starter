@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Menu from './Menu.jsx'
+import Menu from './Menu.js'
 import Battery from './gass/Battery.jsx'
 import Co from './gass/Co.jsx'
 import Co2 from './gass/Co2.jsx'
@@ -35,7 +35,7 @@ export default class Gas extends Component {
 
           <div className='columns'>
             <div className="column is-2">
-              {Menu}
+              <Menu url={this.props.location.pathname}/>
             </div>
             <div className="column is-10">
               <div className="card">

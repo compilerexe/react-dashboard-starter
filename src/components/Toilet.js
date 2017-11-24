@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Menu from './Menu.jsx'
+import Menu from './Menu.js'
 import Temperature from './toilets/Temperature.jsx'
 import Humidity from './toilets/Humidity.jsx'
 import Ammonia from './toilets/Ammonia.jsx'
@@ -32,7 +32,7 @@ export default class Location extends Component {
 
           <div className='columns'>
             <div className="column is-2">
-              {Menu}
+              <Menu url={this.props.location.pathname}/>
             </div>
             <div className="column is-10">
               <div className="card">

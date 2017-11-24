@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2'
 const H2O = (props) => {
 
   let line_data = {
-    labels: [''],
+    labels: ['6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
     datasets: [
       {
         label: 'H2O',
